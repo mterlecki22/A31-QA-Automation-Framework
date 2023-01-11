@@ -8,35 +8,47 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 import java.util.UUID;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 
 public class BaseTest {
-        public static WebDriver driver = null;
-        public static String url = "https://bbb.testpro.io/";
+    public static WebDriver driver = null;
+    public static String url = null;
 
-        @BeforeSuite
-        static void setupClass() { WebDriverManager.chromedriver().setup();}
+    @BeforeSuite
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
-        @BeforeMethod
-        @Parameters({"BaseURL"})
+    @DataProvider(name= "incorrectLoginProviders")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][] {
+                {"invalid@email.com","invalidPassword"},
+                {"demo@mail.com", "invalid"},
+                {"",""}
+        };
+    }
+
+    @BeforeMethod
+    @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) {
         LoginTests.driver = new ChromeDriver();
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            url = BaseURL;
-            driver.get(url);
-        }
-        public static void navigateToPage() {
-            String url = "https://bbb.testpro.io/";
-            driver.get(url);
-        }
-        @AfterMethod   //Quiting the driver after every method
-        public static void closeBrowser () {
-            LoginTests.driver.quit();
-        }
+        url = BaseURL;
+        driver.get(url);
+    }
+
+//    public static void navigateToPage() {
+//        String url = "https://bbb.testpro.io/";
+//        driver.get(url);
+//    }
+
+    @AfterMethod   //Quiting the driver after every method
+    public static void closeBrowser() {
+        LoginTests.driver.quit();
+    }
+
+}
             public static void clickSubmit() {
                 WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
                 submitButton.click();

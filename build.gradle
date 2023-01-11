@@ -18,24 +18,18 @@ dependencies {
 // and save by clicking on elephant icon afterwards.
 test {
     useTestNG() {
-        suites "src/test/resources/Homework18.xml"
+        suites "src/test/resources/Homework19.xml"
     }
 }
 
-// Or you can add multiples at one time please see below for an example....
+task testSmoke(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Smoke.xml"
+    }
+}
+task testRegression(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Regression.xml"
+    }
+}
 
-//    test {    //the first or main gradle test
-//        useTestNG() {
-//            suites "src/test/resources/TestNG.xml"
-//        }
-//    }
-//     task testSmoke(type: Test) {
-//         useTestNG() {
-//             suites "src/test/resources/Smoke.xml"
-//         }
-//     }
-//     task testRegression(type: Test) {
-//         useTestNG() {
-//             suites "src/test/resources/Regression.xml"
-//         }
-//     }
