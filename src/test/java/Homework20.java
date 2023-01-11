@@ -4,41 +4,23 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedCondition.*;
-
-//Homework #19:
-//        Additional Annotations & DataProviders
+//H1. Create a new file Homework20.java with @Test annotation in IntelliJ IDEA.
 //
-//        1. Create a new file Homework19.java with @Test annotation in IntelliJ IDEA.
+//2. Refactor your code - implement Explicit waits.
 //
-//        2. Create a test case deletePlaylist() using @Test annotations.
+//3. Remove all implementations of Thread.sleep.
 //
-//        3. Use the helper/reusable methods we created.
+//4. Make sure your code runs without failures.
 //
-//        4. Use @Parameters for passing baseUrl from the TestNG config file to the tests.
+//5. Create a new branch and commit your changes.
 //
-//        5. Navigate to "https://bbb.testpro.io/".
+//6. Push your code to a remote repository.
 //
-//        6. Log in with your credentials.
-//
-//        7. Choose a playlist.
-//
-//        8. Delete the playlist
-//
-//        9. Validate that the playlist is deleted.
-//
-//        10. Create a new branch and commit your changes.
-//
-//        11. Push your code to a remote repository.
-//
-//        12. Create a pull request.
-
-public class Homework19 extends BaseTest{
+//7. Create a pull request.
+public class Homework20 extends BaseTest{
 
 @Test
 public void deletePlaylistTest () throws InterruptedException {

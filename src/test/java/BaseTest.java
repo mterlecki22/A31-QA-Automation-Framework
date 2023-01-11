@@ -8,12 +8,17 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 import java.util.UUID;
 
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 
 public class BaseTest {
     public static WebDriver driver = null;
     public static String url = null;
+    
+    public static WebDriverWait wait = null;
+    public static FluentWait fluentWait = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -36,6 +41,7 @@ public class BaseTest {
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         driver.get(url);
+        wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
     }
 
 //    public static void navigateToPage() {
