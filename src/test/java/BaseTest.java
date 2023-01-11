@@ -23,7 +23,6 @@ import org.testng.annotations.*;
         static void setupClass() {
             WebDriverManager.chromedriver().setup();
         }
-
         @DataProvider(name = "incorrectLoginProviders")
         public static Object[][] getDataFromDataProviders() {
             return new Object[][]{
@@ -32,7 +31,6 @@ import org.testng.annotations.*;
                     {"", ""}
             };
         }
-
         @BeforeMethod
         @Parameters({"BaseURL"})
         public void launchBrowser(String BaseURL) {
@@ -45,14 +43,15 @@ import org.testng.annotations.*;
 //    public static void navigateToPage() {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
-
         }
-
 
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {
-        LoginTests.driver.quit();
-    }
+        LoginTests.driver.quit();   }
+            public boolean isNotificationPopUpPresent() {
+                WebElement notificationText = driver.findElement(By.cssSelector("div.success.show"));
+                    return notificationText.isDisplayed();
+            }
 
             public static void clickSubmit() {
                 WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));

@@ -69,6 +69,7 @@ public void deletePlaylistTest () throws InterruptedException {
 
     Thread.sleep(3000);
   List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
+    Assert.assertTrue(isNotificationPopUpPresent());
 
     for(WebElement p : playlistNames){
         String name =p.getText();
