@@ -8,47 +8,52 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 import java.util.UUID;
 
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+    public class BaseTest {
+        public static WebDriver driver = null;
+        public static String url = null;
 
-public class BaseTest {
-    public static WebDriver driver = null;
-    public static String url = null;
+        public static WebDriverWait wait = null;
+        public static FluentWait fluentWait = null;
 
-    @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+        @BeforeSuite
+        static void setupClass() {
+            WebDriverManager.chromedriver().setup();
+        }
 
-    @DataProvider(name= "incorrectLoginProviders")
-    public static Object[][] getDataFromDataProviders(){
-        return new Object[][] {
-                {"invalid@email.com","invalidPassword"},
-                {"demo@mail.com", "invalid"},
-                {"",""}
-        };
-    }
+        @DataProvider(name = "incorrectLoginProviders")
+        public static Object[][] getDataFromDataProviders() {
+            return new Object[][]{
+                    {"invalid@email.com", "invalidPassword"},
+                    {"demo@mail.com", "invalid"},
+                    {"", ""}
+            };
+        }
 
-    @BeforeMethod
-    @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) {
-        LoginTests.driver = new ChromeDriver();
-        LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url = BaseURL;
-        driver.get(url);
-    }
+        @BeforeMethod
+        @Parameters({"BaseURL"})
+        public void launchBrowser(String BaseURL) {
+            LoginTests.driver = new ChromeDriver();
+            LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            url = BaseURL;
+            driver.get(url);
+            wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
 
 //    public static void navigateToPage() {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
-//    }
+
+        }
+
 
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {
         LoginTests.driver.quit();
     }
 
-}
             public static void clickSubmit() {
                 WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
                 submitButton.click();
