@@ -1,5 +1,6 @@
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,11 +28,11 @@ public void deletePlaylistTest () throws InterruptedException {
     String playlistName = "Game of Thrones";
 
     //login process
-    login("demo@class.io", "te$t$tudent");
+    login("mitchelterlecki@gmail.com", "te$t$tudent");
 
     //clicking on add button for new playlist
   WebElement addPlaylistIcon = driver.findElement(By.xpath("//i@title='Create a new playlist']"));
-    wait.until(ExpectedCondition.elementToBeClickable(By.xpath("//i@title='Create a new playlist']"))).click();
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i@title='Create a new playlist']"))).click();
 
     //creating new playlist
   WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist"));
@@ -40,16 +41,18 @@ public void deletePlaylistTest () throws InterruptedException {
     nameField.clear();
     nameField.sendKeys(playlistName, Keys.ENTER);
 
-  WebElement testPlaylist =  wait.until(ExpectedCondition.elementToBeClickable(By. xpath("//li/a[text()='"+playlistName+"']"
+  WebElement testPlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By. xpath("//li/a[text()='"+playlistName+"']"
     )));
     testPlaylist.click();
 
     //deleting the playlist
-  WebElement deletePlaylist =  wait.until(ExpectedCondition.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']")));
+  WebElement deletePlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']")));
     deletePlaylist.click();
 
     Thread.sleep(3000);
   List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
+ // Assert.assertTrue(getNotificationText().contains(newSongAddedNotification));
+    Assert.assertTrue(isNotificationPopUpPresent());
 
     for(WebElement p : playlistNames){
         String name =p.getText();
