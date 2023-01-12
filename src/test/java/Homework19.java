@@ -49,52 +49,58 @@ public void deletePlaylistTest () throws InterruptedException {
     login("demo@class.io", "te$t$tudent");
 
     //clicking on add button for new playlist
-  WebElement addPlaylistIcon = driver.findElement(By.xpath("//i@title='Create a new playlist']"));
-    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i@title='Create a new playlist']"))).click();
+    WebElement addPlaylistIcon = driver.findElement(By.xpath("//i@title='Create a new playlist']"));
+    wait.until(ExpectedConditions.elementToBeClickable(addPlaylistIcon)).click();
 
     //creating new playlist
-  WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist"));
+  WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist']"));
     newPlaylist.click();
+
   WebElement nameField = driver.findElement(By.xpath("//input[@name='name']"));
     nameField.clear();
     nameField.sendKeys(playlistName, Keys.ENTER);
 
-  WebElement testPlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By. xpath("//li/a[text()='"+playlistName+"']"
-    )));
+  WebElement testPlaylist =  driver.findElement(By.xpath("//li/a[text()='"+playlistName+"']"));
     testPlaylist.click();
 
     //deleting the playlist
-  WebElement deletePlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']")));
+ WebElement deletePlaylist = driver.findElement(By.xpath("//button[@title='Delete this playlist']")));
     deletePlaylist.click();
 
     Thread.sleep(3000);
-  List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
+    List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
     Assert.assertTrue(isNotificationPopUpPresent());
 
-    for(WebElement p : playlistNames){
-        String name =p.getText();
-        if (name.equals(playlistNames)) {
+    for (WebElement p : playlistNames) {
+        String name = p.getText();
+        if (name.equals(playlistName)){
             Assert.assertTrue(false);
         }
-
-
-
-
+    }
+    }
 }
 
-}
+//    public WebElement getDeletedPlaylistMsg () {
+//       return driver.findElement(By.cssSelector("div.success.show"));
+//
+//    }
 
+        //Alternative DELETION PROCESS
+        // deletePlaylistBtnProcess();
 
+//    WebElement deletedPlaylistMsg = getDeletedPlaylistMsg();
+//    Assert.assertTrue(deletedPlaylistMsg.isDisplayed());
 
-
-
-
-
-
-
-
-
-
-
-
-}
+//    public void deletePlaylistBtnProcess () throws InterruptedException {
+//        WebElement deletePlaylistBtn = driver.findElement(By.cssSelector(".btn-delete-playlist"));
+//        deletePlaylistBtn.click();
+//        Thread.sleep(3000);
+//
+//    }
+////    //Open Playlist
+////    openPlaylist();
+//    public void openPlaylist() throws InterruptedException {
+//    WebElement emptyPlaylist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+//    emptyPlaylist.click();
+//    Thread.sleep(2000);
+//    }

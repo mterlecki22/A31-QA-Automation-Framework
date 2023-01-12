@@ -32,11 +32,11 @@ import org.testng.annotations.*;
             };
         }
         @BeforeMethod
-        @Parameters({"BaseURL"})
-        public void launchBrowser(String BaseURL) {
+        @Parameters({"baseURL"})
+        public void launchBrowser(String baseURL) {
             LoginTests.driver = new ChromeDriver();
             LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            url = BaseURL;
+            url = baseURL;
             driver.get(url);
             wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
 
@@ -47,7 +47,9 @@ import org.testng.annotations.*;
 
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {
-        LoginTests.driver.quit();   }
+        LoginTests.driver.quit();
+        }
+
             public boolean isNotificationPopUpPresent() {
                 WebElement notificationText = driver.findElement(By.cssSelector("div.success.show"));
                     return notificationText.isDisplayed();
@@ -94,6 +96,17 @@ import org.testng.annotations.*;
                 providePassword(password);
                 clickSubmit();
             }
+        public static void openUserProfilePage() {
+            WebElement profileIcon = driver.findElement(By.cssSelector("#userBadge span.name"));
+            profileIcon.click();
+        }
+
+        public static void setName(String newName){
+            WebElement sn = driver.findElement(By.cssSelector("#inputProfileName"));
+            sn.click();
+            sn.clear();
+            sn.sendKeys(newName);
+        }
 
     //Methods below used for Homework17 class - ******disregard********
 //            public static void searchSong (String songTitleKeyword) throws InterruptedException {
