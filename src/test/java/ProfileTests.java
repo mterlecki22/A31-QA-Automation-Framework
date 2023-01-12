@@ -8,10 +8,12 @@ public class ProfileTests extends BaseTest {
 
     @Test(enabled = true, priority = 3, description = "UpdateUserProfileTest")
     public static void updateUserProfileTest() throws InterruptedException {
-        navigateToPage();
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+       // navigateToPage();
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+    //    clickSubmit();
+
+        login("mitchelterlecki@gmail.com", "te$t$tudent");
         Thread.sleep(3000);
 
         String randomName = generateRandomName();

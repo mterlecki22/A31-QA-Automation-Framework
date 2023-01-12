@@ -59,24 +59,6 @@ public void deletePlaylistTest () throws InterruptedException {
             Assert.assertTrue(false);
         }
 
-
-
-
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

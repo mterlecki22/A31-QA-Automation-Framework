@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 import java.util.UUID;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -39,38 +40,48 @@ public class BaseTest {
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
+       // FluentWait wait = new FluentWait(LoginTests.driver);   //example of FluentWait ***rarely used***
+//                wait
+//                .withTimeout(Duration.ofSeconds(10))
+//                .pollingEvery(Duration.ofSeconds(1))
+//                .ignoring(Exception.class);
     }
 
 //    public static void navigateToPage() {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
 //    }
+    public static void login(String email,String password) {   //includes the entire login process
+    provideEmail(email);
+    providePassword(password);
+    clickSubmit();
 
+    }
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {
         LoginTests.driver.quit();
     }
-    public boolean isNotificationPopUpPresent(){
-        WebElement notificationText = driver.findElement(By.cssSelector("div.success.show"));
-        return notificationText.isDisplayed();
-    }
     public static void clickSubmit() {
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-           submitButton.click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+        submitButton.click();
+        //fluentWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("")));  //fluentWait example
      }
     public static void providePassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
+         wait.until(ExpectedConditions.elementToBeClickable(passwordField)); //referring to 'elementToBeClickable' this
+        //method only takes WebElement - otherwise see the 'provideEmail for other way
            passwordField.clear();
            passwordField.sendKeys(password);
      }
     public static void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
+        wait.until(ExpectedConditions.elementToBeClickable(emailField));
            emailField.clear();
            emailField.sendKeys(email);
     }
     public static void clickSaveButton() {
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
-           saveButton.click();
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
+        saveButton.click();
     }
 
     public static void provideProfileName(String randomName) {
@@ -87,12 +98,11 @@ public class BaseTest {
     public static String generateRandomName() {
         return UUID.randomUUID().toString().replace("-" , "");
     }
-    public static void login(String email,String password) {
-        provideEmail(email);
-        providePassword(password);
-          clickSubmit();
+    
+    public boolean isNotificationPopUpPresent(){
+        WebElement notificationText = driver.findElement(By.cssSelector("div.success.show"));
+        return notificationText.isDisplayed();
     }
-
     //Methods below used for Homework17 class - ******disregard********
 //            public static void searchSong (String songTitleKeyword) throws InterruptedException {
 //                WebElement searchField = driver.findElement(By.cssSelector("div#searchForm-input[type=search]"));
