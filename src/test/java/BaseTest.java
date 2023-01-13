@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -6,8 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +22,8 @@ public class BaseTest {
     public static String url = null;
     public static WebDriverWait wait = null;
     public static FluentWait fluentWait = null;
+
+
 
     @BeforeSuite
     static void setupClass() {
@@ -40,6 +45,7 @@ public class BaseTest {
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
+        Actions action = new Actions (driver);
        // FluentWait wait = new FluentWait(LoginTests.driver);   //example of FluentWait ***rarely used***
 //                wait
 //                .withTimeout(Duration.ofSeconds(10))
@@ -98,42 +104,89 @@ public class BaseTest {
     public static String generateRandomName() {
         return UUID.randomUUID().toString().replace("-" , "");
     }
-    
+
     public boolean isNotificationPopUpPresent(){
         WebElement notificationText = driver.findElement(By.cssSelector("div.success.show"));
         return notificationText.isDisplayed();
     }
     //Methods below used for Homework17 class - ******disregard********
-//            public static void searchSong (String songTitleKeyword) throws InterruptedException {
-//                WebElement searchField = driver.findElement(By.cssSelector("div#searchForm-input[type=search]"));
-//                searchField.sendKeys(songTitleKeyword);
-//                Thread.sleep(4000);
-//            }
-//
-//            public static void viewAllSearchResults() throws InterruptedException {
-//                WebElement viewAllSearchResults = driver.findElement(By.cssSelector("div.results-section.songs-h1-button"));
-//                viewAllSearchResults.click();
-//                Thread.sleep(4000);
-//            }
-//
-//            public static void selectFirstSongResult() throws InterruptedException {
-//                WebElement selectFirstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper-tr.song-item-td.title"));
-//                selectFirstSongResult.click();
-//                Thread.sleep(4000);
-//            }
-//
-//            public static void clickAddToButton() throws InterruptedException {
-//                WebElement addTo = driver.findElement(By.cssSelector("button.btn-add-to"));
-//                addTo.click();
-//                Thread.sleep(4000);
+            public static void searchSong (String songTitleKeyword) throws InterruptedException {
+                WebElement searchField = driver.findElement(By.cssSelector("div#searchForm-input[type=search]"));
+                searchField.sendKeys(songTitleKeyword);
+                Thread.sleep(4000);
+            }
+            public void contextClickFirstSong(){
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+                WebElement = driver.findElement(By.cssSelector(".all-songs tr.song-item:nth-child(1)"));
+                Actions action = new Actions (driver);
+                action.contextClick(firstSong().perform());
+            }
 
-//            }
-//            public static void grabASong() {
-//                WebElement song = driver.findElement(By.xpath("//article[@data-test='song-card']")));
-//                WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
-//
-//                Actions acts = new Actions(driver);
-//                acts.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
-//            }
+            public void chooseAllSongsList() {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
+            }
+            public void choosePlay() {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
+            }
+            public boolean isSongPlaying() {
+                WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid= 'sound-bar-play']"));
+            }
+
+            public static void viewAllSearchResults() throws InterruptedException {
+                WebElement viewAllSearchResults = driver.findElement(By.cssSelector("div.results-section.songs-h1-button"));
+                viewAllSearchResults.click();
+                Thread.sleep(4000);
+            }
+
+            public List displayAllSongs(){
+            List <WebElement> songList = driver.findElement(By.cssSelector("#playlistWrapper td.title"));
+            return songList;
+            }
+
+            public static void selectFirstSongResult() throws InterruptedException {
+                WebElement selectFirstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper-tr.song-item-td.title"));
+                selectFirstSongResult.click();
+                Thread.sleep(4000);
+            }
+
+            public static void clickAddToButton() throws InterruptedException {
+                WebElement addTo = driver.findElement(By.cssSelector("button.btn-add-to"));
+                addTo.click();
+                Thread.sleep(4000);
+
+            }
+            public static void grabASong() {
+                WebElement song = driver.findElement(By.xpath("//article[@data-test='song-card']")));
+                WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
+
+                Actions acts = new Actions(driver);
+                acts.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
+            }
+            public Dimension countSongsInPlaylist() {
+                return driver.findElement(By.cssSelector("#playlistWrapper td.title")).getSize();
+            }
+
+            public void choosePlaylist() {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)"))).click();
+            }
+            public void doubleClickChoosePlaylist() {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+            WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+            Actions action = new Actions (driver);
+            action.doubleClick(playlistElement).perform();
+    }
+
+            public void choosePlayListByName(String name) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text)(), ' "+ name +"')]"))).click();
+
+            }
+
+            public static void hoverToPlayBtn() {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn]")));
+            WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn]"));
+            Actions action = new Actions (driver);
+            action.moveToElement(playButton).perform();
+
+            }
 
 }
