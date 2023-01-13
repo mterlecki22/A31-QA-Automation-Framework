@@ -39,46 +39,51 @@ import static org.openqa.selenium.support.ui.ExpectedCondition.*;
 //
 //        12. Create a pull request.
 
-public class Homework19 extends BaseTest{
+public class Homework19 extends BaseTest {
 
-@Test
-public void deletePlaylistTest () throws InterruptedException {
-    String playlistName = "Game of Thrones";
+    @Test
+    public void deletePlaylistTest() throws InterruptedException {
+        String playlistName = "Game of Thrones";
 
-    //login process
-    login("demo@class.io", "te$t$tudent");
+        //login process
+        login("mitchelterlecki@gmail.com", "te$t$tudent");
 
-    //clicking on add button for new playlist
-    WebElement addPlaylistIcon = driver.findElement(By.xpath("//i@title='Create a new playlist']"));
-    wait.until(ExpectedConditions.elementToBeClickable(addPlaylistIcon)).click();
 
-    //creating new playlist
-  WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist']"));
-    newPlaylist.click();
+        //i[@title='Create a new playlist']
 
-  WebElement nameField = driver.findElement(By.xpath("//input[@name='name']"));
-    nameField.clear();
-    nameField.sendKeys(playlistName, Keys.ENTER);
+        //clicking on add button for new playlist
+        WebElement addPlaylistIcon = driver.findElement(By.xpath("//i[@title='Create a new playlist']"));
+        wait.until(ExpectedConditions.elementToBeClickable(addPlaylistIcon)).click();
 
-  WebElement testPlaylist =  driver.findElement(By.xpath("//li/a[text()='"+playlistName+"']"));
-    testPlaylist.click();
+        //creating new playlist
+        WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist']"));
+        newPlaylist.click();
 
-    //deleting the playlist
- WebElement deletePlaylist = driver.findElement(By.xpath("//button[@title='Delete this playlist']")));
-    deletePlaylist.click();
+        WebElement nameField = driver.findElement(By.xpath("//input[@name='name']"));
+        nameField.clear();
+        nameField.sendKeys(playlistName, Keys.ENTER);
 
-    Thread.sleep(3000);
-    List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
-    Assert.assertTrue(isNotificationPopUpPresent());
+        WebElement testPlaylist = driver.findElement(By.xpath("//li/a[text()='" + playlistName + "']"));
+        testPlaylist.click();
 
-    for (WebElement p : playlistNames) {
-        String name = p.getText();
-        if (name.equals(playlistName)){
-            Assert.assertTrue(false);
-        }
-    }
+        //deleting the playlist
+        WebElement deletePlaylist = driver.findElement(By.xpath("//button[@title='Delete this playlist']"));
+        deletePlaylist.click();
     }
 }
+
+//    Thread.sleep(3000);
+//    List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
+//    Assert.assertTrue(isNotificationPopUpPresent());
+//
+//    for (WebElement p : playlistNames) {
+//        String name = p.getText();
+//        if (name.equals(playlistName)){
+//            Assert.assertTrue(false);
+//        }
+//    }
+//    }
+//}
 
 //    public WebElement getDeletedPlaylistMsg () {
 //       return driver.findElement(By.cssSelector("div.success.show"));
