@@ -9,7 +9,7 @@ public static void updateUserProfileTest() throws InterruptedException {
         String newName = generateRandomName();
 
 
-    login("demo@class.io", "te$t$tudent");
+    login("demo@class.com", "te$t$tudent");
 
         Thread.sleep(2000);
         openUserProfilePage();
