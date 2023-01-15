@@ -1,8 +1,11 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class LoginTests extends BaseTest {
 
@@ -37,5 +40,31 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
 
+        // Typed during class
+
+        @Test
+        public void hoverOverPlayButton(){
+            login();
+            chooseAllSongsList();
+            hoverPlay();
+            Assert.assertTrue(hoverPlay().isDisplayed());
+
+        }
+
+        public WebElement hoverPlay() {   //helper method
+            WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+            action.moveToElement(play).perform();
+            return driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        }
+
+        @Test
+        public void listOfSongWebElements() {
+            login("mitchelterlecki@gmail.com", "Te$t$tudent");
+            List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
+            System.out.println("Number of Songs found" +countSongsInPlaylist()+);
+            for (WebElement e : songList) {
+                System.out.println(e.getText());
+
+            }
     }
 }

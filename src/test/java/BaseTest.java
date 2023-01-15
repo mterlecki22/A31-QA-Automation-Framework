@@ -1,10 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 import java.util.List;
@@ -22,6 +18,8 @@ public class BaseTest {
     public static String url = null;
     public static WebDriverWait wait = null;
     public static FluentWait fluentWait = null;
+
+    public static Actions action = null;
 
 
 
@@ -45,7 +43,9 @@ public class BaseTest {
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
-        Actions action = new Actions (driver);
+        Actions action = new Actions(driver);
+       // List<WebElement> listOfElements = driver.findElement(By.xpath("//div"));
+
        // FluentWait wait = new FluentWait(LoginTests.driver);   //example of FluentWait ***rarely used***
 //                wait
 //                .withTimeout(Duration.ofSeconds(10))
@@ -75,7 +75,7 @@ public class BaseTest {
     public static void providePassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
          wait.until(ExpectedConditions.elementToBeClickable(passwordField)); //referring to 'elementToBeClickable' this
-        //method only takes WebElement - otherwise see the 'provideEmail for other way
+    //    method only takes WebElement - otherwise see the 'provideEmail for other way
            passwordField.clear();
            passwordField.sendKeys(password);
      }
@@ -122,7 +122,7 @@ public class BaseTest {
                 action.contextClick(firstSong().perform());
             }
 
-            public void chooseAllSongsList() {
+            public static void chooseAllSongsList() {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
             }
             public void choosePlay() {
@@ -139,7 +139,7 @@ public class BaseTest {
             }
 
             public List displayAllSongs(){
-            List <WebElement> songList = driver.findElement(By.cssSelector("#playlistWrapper td.title"));
+            List <WebElement> songList = driver.findElements(By.cssSelector("#playlistWrapper td.title"));
             return songList;
             }
 
@@ -158,21 +158,24 @@ public class BaseTest {
             public static void grabASong() {
                 WebElement song = driver.findElement(By.xpath("//article[@data-test='song-card']")));
                 WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
-
-                Actions acts = new Actions(driver);
-                acts.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
+                action.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
             }
-            public Dimension countSongsInPlaylist() {
+            public static Dimension countSongsInPlaylist() {
                 return driver.findElement(By.cssSelector("#playlistWrapper td.title")).getSize();
             }
 
             public void choosePlaylist() {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)"))).click();
             }
+            public boolean doesPlaylistExist() {
+            WebElement playlistElement = driver.findElement(By.xpath("//a[text()='Edited Playlist Name']"));
+            return playlistElement.isDisplayed();
+            }
+
             public void doubleClickChoosePlaylist() {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
             WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
-            Actions action = new Actions (driver);
+           // Actions action = new Actions (driver);
             action.doubleClick(playlistElement).perform();
     }
 
@@ -184,9 +187,18 @@ public class BaseTest {
             public static void hoverToPlayBtn() {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn]")));
             WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn]"));
-            Actions action = new Actions (driver);
-            action.moveToElement(playButton).perform();
+            Actions actions = new Actions (driver);
+            actions.moveToElement(playButton).perform();
 
             }
+
+            public void enterPlaylistName() {
+            WebElement playlistInputField = driver.findElement(By.cssSelector("input[name='name']"));
+//            clear() does not work, element has an attribute of "required"
+//            workaround is ctrl A (to select all) then backspace to clear then replace with new playlist name
+            playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+            playlistInputField.sendKeys("Summer Songs");
+            playlistInputField.sendKeys(Keys.ENTER);
+    }
 
 }

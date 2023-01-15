@@ -7,44 +7,34 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class Homework21 extends BaseTest{{
 
 
-    @Test
-    public void deletePlaylistTest () throws InterruptedException {
-        String playlistName = "Game of Thrones";
+// HOMEWORK 21:
 
-        //login process
+// 1. Using Action Class methods, create/refactor the test case renamePlaylist().
+//
+//2. Implement Explicit Waits.
+//
+//3. Remove all Thread.sleep implementations.
+//
+//4. Create a new branch and commit your changes.
+//
+//5. Push your code to a remote repository.
+//
+//6. Create a pull request.
+
+public class Homework21 extends BaseTest {
+    {
+        @Test
+        public void renamePlaylist(){
+
         login("mitchelterlecki@gmail.com", "te$t$tudent");
+        doubleClickChoosePlaylist();
+        enterPlaylistName();
+        Assert.assertTrue(doesPlaylistExist());
+        Thread.sleep(2000);
 
-        //clicking on add button for new playlist
-        WebElement addPlaylistIcon = driver.findElement(By.xpath("//i@title='Create a new playlist']"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i@title='Create a new playlist']"))).click();
 
-        //creating new playlist
-        WebElement newPlaylist = driver.findElement(By.xpath("//li[text()='New Playlist"));
-        newPlaylist.click();
-        WebElement nameField = driver.findElement(By.xpath("//input[@name='name']"));
-        nameField.clear();
-        nameField.sendKeys(playlistName, Keys.ENTER);
-
-        WebElement testPlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By. xpath("//li/a[text()='"+playlistName+"']"
-        )));
-        testPlaylist.click();
-
-        //deleting the playlist
-        WebElement deletePlaylist =  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Delete this playlist']")));
-        deletePlaylist.click();
-
-        Thread.sleep(3000);
-        List<WebElement> playlistNames = driver.findElement(By.xpath("//section[@id='playlists']//li/a"));
-        Assert.assertTrue(isNotificationPopUpPresent());
-
-        for(WebElement p : playlistNames){
-            String name = p.getText();
-            if (name.equals(playlistName)) {
-                Assert.assertTrue(false);
-            }
-
-        }
-
+    }
+    }
+}

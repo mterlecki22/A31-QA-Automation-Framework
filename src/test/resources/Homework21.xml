@@ -8,7 +8,7 @@
         <classes>
             <class name="Homework21">
                <methods>
-                       <include name="deletePlaylistTest"/>
+                       <include name="renamePlaylistTest"/>
                </methods>
                   </class>
 

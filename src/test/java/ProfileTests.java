@@ -13,7 +13,7 @@ public class ProfileTests extends BaseTest {
 //        providePassword("te$t$tudent");
     //    clickSubmit();
 
-        login("mitchelterlecki@gmail.com", "te$t$tudent");
+        login("demo@class.com", "te$t$tudent");
         Thread.sleep(3000);
 
         String randomName = generateRandomName();
