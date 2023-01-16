@@ -8,6 +8,8 @@
         <classes>
             <class name="Homework20">
                <methods>
+                       <include name="addSongToPlaylist"/>
+                       <include name="playASongTest"/>
                        <include name="deletePlaylistTest"/>
                </methods>
                   </class>
