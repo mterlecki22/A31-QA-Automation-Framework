@@ -36,13 +36,11 @@ public class LoginTests extends BaseTest {
         //homePage.getUserAvatar().isDisplayed();
         //alternative method (isDisplayed not working)
         loginPage.provideEmail ("mitchelterlecki@gmail.com");
-        loginPage.providePassword ("te@t@tudent");
+        loginPage.providePassword ("te$t$tudent");
         loginPage.clickSubmitBtn();
         //Thread.sleep(5000);
        // WebElement avatartIcon = wait.until(By.cssSelector("img.avatar"));
-        Assert.assertTrue(homePage.getUserAvatar.isDisplayed());
-
-
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
 //        provideEmail("demo@class.com");
 //        providePassword("te$t$tudent");

@@ -10,19 +10,25 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
+import static java.time.Duration.*;
+
 public class HomePage extends BasePage {
 WebDriver driver;
 WebDriverWait wait;
 
 //By userAvatarIcon = By.cssSelector("img.avatar");
 
-    public HomePage (WebDriver givenDriver) {
-        super();
-        driver = givenDriver;
-        wait = new WebDriver(driver,Duration.ofSeconds(5));
+    String playlistName = "Game of Thrones";
 
-    By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
-    By playlistInputField = By.cssSelector("input[name='name']");
+    public HomePage (WebDriver givenDriver) {
+        super(givenDriver);
+    }
+//        driver = givenDriver;
+//        wait = new WebDriver(driver Duration.ofSeconds(5));
+
+        By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
+        By playlistInputField = By.cssSelector("input[name='name']");
+
 
     public void doubleClickFirstPlaylist() {
         doubleClick(driver.findElement(firstPlaylist));
@@ -35,7 +41,7 @@ WebDriverWait wait;
     }
      //   public HomePage getUserAvatar(){
      //       return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon);
-    }
+    // }
 
     public HomePage getUserAvatar(){
         driver.findElement(By.xpath("//*[id=\"userBadge\""));

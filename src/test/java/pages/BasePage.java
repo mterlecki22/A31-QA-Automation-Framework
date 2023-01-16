@@ -20,13 +20,13 @@ import org.testng.annotations.*;
 
 public class BasePage {
     public WebDriver driver;
-    public WebDriver wait;
+    public WebDriverWait wait;
 
     Actions actions;
 
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait (driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
     }
 
@@ -35,9 +35,10 @@ public class BasePage {
         actions.doubleClick(locator).perform();
     }
 
-    public void click(By locator) {
+    public void click (By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
 
     public WebElement findElement(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));

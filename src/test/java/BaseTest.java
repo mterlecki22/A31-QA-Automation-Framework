@@ -168,11 +168,11 @@ public class BaseTest {
         addTo.click();
 
     }
-    //            public static void grabASong() {
-//                WebElement song = driver.findElement(By.xpath("//article[@data-test='song-card']")));
-//                WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
-//                action.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
-    //          }
+//    public static void grabASong() {
+//    WebElement song = driver.findElement(By.xpath("//article[@data-test='song-card']")));
+//    WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
+//    action.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
+//  }
     public static Dimension countSongsInPlaylist() {
         return driver.findElement(By.cssSelector("#playlistWrapper td.title")).getSize();
     }
@@ -210,7 +210,7 @@ public class BaseTest {
 //            clear() does not work, element has an attribute of "required"
 //            workaround is ctrl A (to select all) then backspace to clear then replace with new playlist name
         playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
-        playlistInputField.sendKeys("Summer Songs");
+        playlistInputField.sendKeys("Game of Thrones");
         playlistInputField.sendKeys(Keys.ENTER);
     }
 

@@ -13,7 +13,7 @@ public class PlaylistTests extends BasePage {
 
     @Test
     public void renamePlaylist () {
-        String playlistName = "Test Pro Playlist";
+        String playlistName = "Game of Thrones";
 
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
