@@ -12,7 +12,7 @@
                </methods>
                   </class>
 
-            <class name="ProfileTests"/>
+<!--            <class name="ProfileTests"/>-->
             <class name="BaseTest"/>
         </classes>
     </test>

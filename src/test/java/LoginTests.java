@@ -39,17 +39,16 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
-
-        // Typed during class
-
+    }
         @Test
-        public void hoverOverPlayButton(){
-            login();
+        public void hoverOverPlayButton () {
+            login("mitchelterlecki@gmail.com","te$tStudent" );
             chooseAllSongsList();
             hoverPlay();
             Assert.assertTrue(hoverPlay().isDisplayed());
 
         }
+
 
         public WebElement hoverPlay() {   //helper method
             WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
@@ -61,7 +60,7 @@ public class LoginTests extends BaseTest {
         public void listOfSongWebElements() {
             login("mitchelterlecki@gmail.com", "Te$t$tudent");
             List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
-            System.out.println("Number of Songs found" +countSongsInPlaylist()+);
+            System.out.println("Number of Songs found" +countSongsInPlaylist());
             for (WebElement e : songList) {
                 System.out.println(e.getText());
 
