@@ -63,7 +63,6 @@ public class BaseTest {
         provideEmail(email);
         providePassword(password);
         clickSubmit();
-
     }
 
     @AfterMethod   //Quiting the driver after every method

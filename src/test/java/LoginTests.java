@@ -1,3 +1,5 @@
+import POMMethod.HomePage2;
+import POMMethod.LoginPage2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,16 +31,16 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
-    public static void loginEmailValidPassword()throws InterruptedException{
+    public static void LoginEmailValidPassword()throws InterruptedException{
 
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        HomePage2 homePage = new HomePage2(driver);
+        LoginPage2 loginPage = new LoginPage2(driver);
         //homePage.getUserAvatar().isDisplayed();
         //alternative method (isDisplayed not working)
         loginPage.provideEmail ("mitchelterlecki@gmail.com");
         loginPage.providePassword ("te$t$tudent");
         loginPage.clickSubmitBtn();
-        //Thread.sleep(5000);
+        Thread.sleep(5000);
        // WebElement avatartIcon = wait.until(By.cssSelector("img.avatar"));
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
