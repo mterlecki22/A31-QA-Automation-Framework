@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.BasePage;
@@ -29,17 +30,13 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
-    public static void loginEmailValidPassword()throws InterruptedException{
+    public static void LoginEmailValidPassword()throws InterruptedException{
 
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        //homePage.getUserAvatar().isDisplayed();
-        //alternative method (isDisplayed not working)
         loginPage.provideEmail ("mitchelterlecki@gmail.com");
-        loginPage.providePassword ("te$t$tudent");
-        loginPage.clickSubmitBtn();
-        //Thread.sleep(5000);
-       // WebElement avatartIcon = wait.until(By.cssSelector("img.avatar"));
+                 .providePassword ("te$t$tudent");
+                 .clickSubmit();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
 //        provideEmail("demo@class.com");
@@ -48,6 +45,26 @@ public class LoginTests extends BaseTest {
 //        Thread.sleep(2000);
 //        WebElement avatartIcon = driver.findElement(By.cssSelector("img.avatar"));
 //        Assert.assertTrue(avatartIcon.isDisplayed());
+    }
+    @Test
+    public void playSong()   {  // Look at assigment #22 for alterted refactored code
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        loginPage.login();
+        chooseAllSongsList();
+        allSongsPage.contextClickFirstSong();
+        allSongsPage.choosePlay();
+        Assert.assertTrue(allSongsPage.isSongPlaying());
+    }
+
+    @Test
+    public void playSong()   {  // Look at assigment #22 for alterted refactored code
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+        loginPage.provideEmail("mitchelterlecki@gmail.com").providePassword("te$t$tudent").clickSubmitBtn();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
 }

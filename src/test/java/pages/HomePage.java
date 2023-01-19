@@ -3,7 +3,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -13,8 +15,14 @@ import java.util.Set;
 import static java.time.Duration.*;
 
 public class HomePage extends BasePage {
-WebDriver driver;
-WebDriverWait wait;
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static WebDriverWait wait = null;
+    public static FluentWait fluentWait = null;
+
+    public static Actions action = null;
+//WebDriver driver;
+//WebDriverWait wait;
 
 //By userAvatarIcon = By.cssSelector("img.avatar");
 

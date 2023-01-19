@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 
@@ -17,8 +18,6 @@ public class BaseTest {
     public static WebDriver driver = null;
     public static String url = null;
     public static WebDriverWait wait = null;
-    public static FluentWait fluentWait = null;
-
     public static Actions action = null;
 
 
@@ -91,6 +90,7 @@ public class BaseTest {
         emailField.clear();
         emailField.sendKeys(email);
     }
+
 
     public static void clickSaveButton() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
@@ -213,5 +213,7 @@ public class BaseTest {
         playlistInputField.sendKeys("Game of Thrones");
         playlistInputField.sendKeys(Keys.ENTER);
     }
+
+
 
 }
