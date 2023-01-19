@@ -17,11 +17,7 @@ public class BasePage {
     public static WebDriver driver = null;
     public static String url = null;
     public static WebDriverWait wait = null;
-    public static Actions action = null;
-//    public WebDriver driver;
-//    public static WebDriverWait wait;
-
-    Actions actions;
+    public static Actions actions = null;
 
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;

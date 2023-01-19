@@ -35,8 +35,8 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail ("mitchelterlecki@gmail.com");
-                 .providePassword ("te$t$tudent");
-                 .clickSubmit();
+        loginPage.providePassword ("te$t$tudent");
+        loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
 //        provideEmail("demo@class.com");
@@ -58,14 +58,14 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(allSongsPage.isSongPlaying());
     }
 
-    @Test
-    public void playSong()   {  // Look at assigment #22 for alterted refactored code
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-        loginPage.provideEmail("mitchelterlecki@gmail.com").providePassword("te$t$tudent").clickSubmitBtn();
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-    }
+//    @Test
+//    public void playSong()   {  // Look at assigment #22 for alterted refactored code
+//        LoginPage loginPage = new LoginPage(driver);
+//        HomePage homePage = new HomePage(driver);
+//        AllSongsPage allSongsPage = new AllSongsPage(driver);
+//        loginPage.provideEmail("mitchelterlecki@gmail.com").providePassword("te$t$tudent").clickSubmitBtn();
+//        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+//    }
 
 }
 

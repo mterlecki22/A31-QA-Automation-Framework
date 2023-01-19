@@ -15,16 +15,9 @@ import java.util.Set;
 import static java.time.Duration.*;
 
 public class HomePage extends BasePage {
-    public static WebDriver driver = null;
-    public static String url = null;
-    public static WebDriverWait wait = null;
-    public static FluentWait fluentWait = null;
 
-    public static Actions action = null;
-//WebDriver driver;
-//WebDriverWait wait;
 
-//By userAvatarIcon = By.cssSelector("img.avatar");
+By userAvatarIcon = By.cssSelector("img.avatar");
 
     String playlistName = "Game of Thrones";
 
@@ -47,14 +40,14 @@ public class HomePage extends BasePage {
         driver.findElement(playlistInputField).sendKeys(playlistName);
         driver.findElement(playlistInputField).sendKeys(Keys.ENTER);
     }
-     //   public HomePage getUserAvatar(){
-     //       return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon);
-    // }
+        public WebElement getUserAvatar(){
+            return findElement(userAvatarIcon);
+     }
 
-    public HomePage getUserAvatar(){
-        driver.findElement(By.xpath("//*[id=\"userBadge\""));
-                return this;
-    }
+//    public HomePage getUserAvatar(){
+//        driver.findElement(By.xpath("//*[id=\"userBadge\""));
+//                return this;
+//    }
 
     public boolean doesPlaylistExist(String playlistName){
         WebElement playlistElement = driver.findElement(By.xpath("//a[text()=' "+playlistName+"']"));
