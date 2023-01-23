@@ -30,18 +30,12 @@ public class LoginTests extends BaseTest {
 
     }
 
-    @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
+    @Test(enabled = true, priority = 1, description = "LoginEmailValidPassword")
     public static void LoginEmailValidPassword()throws InterruptedException{
 
         HomePage2 homePage = new HomePage2(driver);
         LoginPage2 loginPage = new LoginPage2(driver);
-        //homePage.getUserAvatar().isDisplayed();
-        //alternative method (isDisplayed not working)
-        loginPage.provideEmail ("mitchelterlecki@gmail.com");
-        loginPage.providePassword ("te$t$tudent");
-        loginPage.clickSubmitBtn();
-        Thread.sleep(5000);
-       // WebElement avatartIcon = wait.until(By.cssSelector("img.avatar"));
+       loginPage.login();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
 //        provideEmail("demo@class.com");

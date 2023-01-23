@@ -14,7 +14,6 @@ public class LoginPage2 extends BasePage2 {
 
     public LoginPage2(WebDriver givenDriver) {
         super(givenDriver);
-
     }
 
     public void provideEmail(String email) {
@@ -41,6 +40,5 @@ public class LoginPage2 extends BasePage2 {
         provideEmail("mitchelterlecki@gmail.com");
         providePassword("te$t$tudent");
         clickSubmitBtn();
-
     }
 }

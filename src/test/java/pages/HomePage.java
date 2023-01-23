@@ -39,14 +39,14 @@ WebDriverWait wait;
         driver.findElement(playlistInputField).sendKeys(playlistName);
         driver.findElement(playlistInputField).sendKeys(Keys.ENTER);
     }
-     //   public HomePage getUserAvatar(){
-     //       return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon);
-    // }
+//        public HomePage getUserAvatar(){
+//            return wait.until(ExpectedConditions.visibilityOfElementLocated(userAvatarIcon);
+//     }
 
-    public HomePage getUserAvatar(){
-        driver.findElement(By.xpath("//*[id=\"userBadge\""));
-                return this;
-    }
+//    public HomePage getUserAvatar(){
+//        driver.findElement(By.xpath("//*[id=\"userBadge\""));
+//                return this;
+//    }
 
     public boolean doesPlaylistExist(String playlistName){
         WebElement playlistElement = driver.findElement(By.xpath("//a[text()=' "+playlistName+"']"));
