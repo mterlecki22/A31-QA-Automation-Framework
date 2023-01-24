@@ -2,11 +2,18 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
+import org.openqa.selenium.chrome.ChromeDriverInfo;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +30,7 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        //  WebDriverManager.chromedriver().setup();
     }
 
     @DataProvider(name = "incorrectLoginProviders")
@@ -37,8 +44,8 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) {
-        LoginTests.driver = new ChromeDriver();
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
+        driver = pickBrowser(System.getProperty("browser"));
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         driver.get(url);
@@ -46,15 +53,40 @@ public class BaseTest {
         Actions action;
         action = new Actions(driver);
 
-        // List<WebElement> listOfElements = driver.findElement(By.xpath("//div"));
-        // FluentWait wait = new FluentWait(Pages.LoginTests.driver);   //example of FluentWait ***rarely used***
-//                wait
-//                .withTimeout(Duration.ofSeconds(10))
-//                .pollingEvery(Duration.ofSeconds(1))
-//                .ignoring(Exception.class);
     }
 
-    //    public static void navigateToPage() {
+    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.1.250:4444";
+        switch (browser) {
+            case "Firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                break;
+            case "grid-firefox":
+                caps.setCapability("browserName", "Firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-edge":
+                caps.setCapability("browserName", "Mircrosoft Edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "grid-chrome":
+                caps.setCapability("browserName", "Chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            default:
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+        }
+        return driver;
+    }
+
+
+
+
+//        public static void navigateToPage() {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
 //    }
@@ -130,9 +162,9 @@ public class BaseTest {
 //                action.contextClick(firstSong().perform());
 //            }
 
-    public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
-    }
+//    public static void chooseAllSongsList() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
+//    }
 
     public void choosePlay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();

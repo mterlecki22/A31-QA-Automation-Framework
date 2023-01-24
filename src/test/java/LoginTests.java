@@ -51,8 +51,11 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
-        loginPage.login();
-        chooseAllSongsList();
+        //loginPage.login();
+        loginPage.provideEmail ("mitchelterlecki@gmail.com");
+        loginPage.providePassword ("te$t$tudent");
+        loginPage.clickSubmitBtn();
+        AllSongsPage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();
         Assert.assertTrue(allSongsPage.isSongPlaying());

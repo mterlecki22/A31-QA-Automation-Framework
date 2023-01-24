@@ -15,7 +15,6 @@ import org.testng.Assert;
 
 public class BasePage {
     public static WebDriver driver = null;
-    public static String url = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
 
@@ -39,22 +38,14 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
     }
-    public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
-    }
     public void contextClickFirstSong() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
         WebElement firstSong = driver.findElement(By.cssSelector(".all-songs tr.song-item:nth-child(1)"));
         Actions action = new Actions(driver);
         action.contextClick(firstSong).perform();
     }
-    public void choosePlay() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
-    }
-    public boolean isSongPlaying() {
-        WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
-        return soundBarVisualizer.isDisplayed();
-    }
+
+
     //hover to play button/controls - refer to SeleniumTechniques for old code.
 //    public  WebElement hoverToPlayBtn(){
 //

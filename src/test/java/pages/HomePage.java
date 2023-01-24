@@ -24,9 +24,6 @@ By userAvatarIcon = By.cssSelector("img.avatar");
     public HomePage (WebDriver givenDriver) {
         super(givenDriver);
     }
-//        driver = givenDriver;
-//        wait = new WebDriver(driver Duration.ofSeconds(5));
-
         By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
         By playlistInputField = By.cssSelector("input[name='name']");
 
@@ -44,10 +41,6 @@ By userAvatarIcon = By.cssSelector("img.avatar");
             return findElement(userAvatarIcon);
      }
 
-//    public HomePage getUserAvatar(){
-//        driver.findElement(By.xpath("//*[id=\"userBadge\""));
-//                return this;
-//    }
 
     public boolean doesPlaylistExist(String playlistName){
         WebElement playlistElement = driver.findElement(By.xpath("//a[text()=' "+playlistName+"']"));
@@ -55,9 +48,11 @@ By userAvatarIcon = By.cssSelector("img.avatar");
     }
 
 
-
-
-
+    // Alternative Method
+//    public HomePage getUserAvatar(){
+//        driver.findElement(By.xpath("//*[id=\"userBadge\""));
+//                return this;
+//    }
 
 
 
