@@ -32,36 +32,27 @@ public class LoginTests extends BaseTest {
     @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
     public static void LoginEmailValidPassword()throws InterruptedException{
 
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.provideEmail ("mitchelterlecki@gmail.com");
         loginPage.providePassword ("te$t$tudent");
         loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-//        provideEmail("demo@class.com");
-//        providePassword("te$t$tudent");
-//        clickSubmit();
-//        Thread.sleep(2000);
-//        WebElement avatartIcon = driver.findElement(By.cssSelector("img.avatar"));
-//        Assert.assertTrue(avatartIcon.isDisplayed());
     }
     @Test
     public void playSong()   {  // Look at assigment #22 for alterted refactored code
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-        //loginPage.login();
-        loginPage.provideEmail ("mitchelterlecki@gmail.com");
-        loginPage.providePassword ("te$t$tudent");
-        loginPage.clickSubmitBtn();
-        AllSongsPage.chooseAllSongsList();
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongsPage = new AllSongsPage(getDriver());
+        loginPage.login();
+        homePage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();
         Assert.assertTrue(allSongsPage.isSongPlaying());
     }
 
-//    @Test
+//    @Test   //alternative to the one above
 //    public void playSong()   {  // Look at assigment #22 for alterted refactored code
 //        LoginPage loginPage = new LoginPage(driver);
 //        HomePage homePage = new HomePage(driver);

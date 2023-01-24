@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static java.sql.DriverManager.getDriver;
+
 public class LoginPage extends BasePage {
 
 
@@ -19,7 +21,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
-        PageFactory.initElements(driver, LoginPage.class);
+        PageFactory.initElements(getDriver(), LoginPage.class);
     }
 
     public void provideEmail(String email) {

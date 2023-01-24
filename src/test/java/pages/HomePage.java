@@ -46,6 +46,9 @@ By userAvatarIcon = By.cssSelector("img.avatar");
         WebElement playlistElement = driver.findElement(By.xpath("//a[text()=' "+playlistName+"']"));
         return playlistElement.isDisplayed();
     }
+    public static void chooseAllSongsList() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
+    }
 
 
     // Alternative Method

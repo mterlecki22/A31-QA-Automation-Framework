@@ -17,9 +17,7 @@ public class AllSongsPage extends BasePage{
     public void choosePlay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
     }
-    public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
-    }
+
      public boolean isSongPlaying() {
         WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
         return soundBarVisualizer.isDisplayed();
