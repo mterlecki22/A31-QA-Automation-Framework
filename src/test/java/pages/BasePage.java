@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class BasePage {
     public static WebDriver driver = null;
     public static String url = null;
@@ -27,29 +29,25 @@ public class BasePage {
     }
 
     public void doubleClick(WebElement locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        wait.until(elementToBeClickable(locator));
         actions.doubleClick(locator).perform();
     }
 
     public void click (By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        wait.until(elementToBeClickable(locator));
     }
 
     public WebElement findElement(By locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
-    }
-    public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
+        return wait.until(visibilityOfElementLocated(locator));
     }
     public void contextClickFirstSong() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+        wait.until(visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
         WebElement firstSong = driver.findElement(By.cssSelector(".all-songs tr.song-item:nth-child(1)"));
         Actions action = new Actions(driver);
         action.contextClick(firstSong).perform();
     }
     public void choosePlay() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
+        wait.until(visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
     }
     public boolean isSongPlaying() {
         WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));

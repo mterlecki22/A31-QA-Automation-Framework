@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -23,7 +25,7 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+     //   WebDriverManager.chromedriver().setup();
     }
 
     @DataProvider(name = "incorrectLoginProviders")
@@ -38,6 +40,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) {
+        driver = pickBrowser(System.getProperty("browser"));
         LoginTests.driver = new ChromeDriver();
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
@@ -68,6 +71,24 @@ public class BaseTest {
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {
         LoginTests.driver.quit();
+    }
+
+    private static WebDriver pickBrowser (String browser){
+        switch (browser){
+            case "Firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                break;
+            default:
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+        }
+        return driver;
+
     }
 
     public static void clickSubmit() {

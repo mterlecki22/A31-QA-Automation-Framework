@@ -52,7 +52,7 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
         loginPage.login();
-        chooseAllSongsList();
+        homePage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();
         Assert.assertTrue(allSongsPage.isSongPlaying());
