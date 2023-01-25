@@ -13,9 +13,7 @@ public class AllSongsPage extends BasePage {
 
     public AllSongsPage(WebDriver givenDriver) {
         super(givenDriver);
-
-    }
-
+        }
         public void choosePlay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
         }

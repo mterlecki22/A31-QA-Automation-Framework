@@ -39,13 +39,16 @@ public class LoginTests extends BaseTest {
         loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-//        provideEmail("demo@class.com");
-//        providePassword("te$t$tudent");
-//        clickSubmit();
-//        Thread.sleep(2000);
-//        WebElement avatartIcon = driver.findElement(By.cssSelector("img.avatar"));
-//        Assert.assertTrue(avatartIcon.isDisplayed());
     }
+                //FLUENT INTERFACE EXAMPLE:
+//    @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
+//    public static void LoginEmailValidPassword()throws InterruptedException {
+//
+//        HomePage homePage = new HomePage(driver);
+//        LoginPage loginPage = new LoginPage(driver);
+//        loginPage.provideEmail("mitchelterlecki@gmail.com")providePassword("te$t$tudent").clickSubmitBtn();
+//        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+//    }
     @Test
     public void playSong()   {  // Look at assigment #22 for alterted refactored code
         LoginPage loginPage = new LoginPage(driver);

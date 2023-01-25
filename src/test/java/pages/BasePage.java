@@ -36,7 +36,6 @@ public class BasePage {
     public void click (By locator) {
         wait.until(elementToBeClickable(locator));
     }
-
     public WebElement findElement(By locator){
         return wait.until(visibilityOfElementLocated(locator));
     }
@@ -46,13 +45,11 @@ public class BasePage {
         Actions action = new Actions(driver);
         action.contextClick(firstSong).perform();
     }
-    public void choosePlay() {
-        wait.until(visibilityOfElementLocated(By.cssSelector("nav.menu.song-menu li.playback"))).click();
-    }
     public boolean isSongPlaying() {
         WebElement soundBarVisualizer = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
         return soundBarVisualizer.isDisplayed();
     }
+
     //hover to play button/controls - refer to SeleniumTechniques for old code.
 //    public  WebElement hoverToPlayBtn(){
 //

@@ -21,19 +21,16 @@ public class LoginPage extends BasePage {
         super(givenDriver);
         PageFactory.initElements(driver, LoginPage.class);
     }
+    //    @FindBy (css="[test]")
+//    WebElement email;
 
     public void provideEmail(String email) {
-        emailField.click();
+        emailField.sendKeys(email);
     }
-
-//    @FindBy (css="[test]")
-//    WebElement email;
 
     public void providePassword(String password) {
         passwordField.sendKeys(password);
-
     }
-
     public void clickSubmitBtn() {
         submitButtonLocator.click();
     }
@@ -54,6 +51,23 @@ public class LoginPage extends BasePage {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
         saveButton.click();
     }
+
+
+    // FOLLOWING ARE EXAMPLES OF FLUENT INTERFACE
+
+//    public LoginPage provideEmail(String email) {
+//        emailField.sendKeys(email);
+//          return this;
+//    }
+//
+//    public LoginPage providePassword(String password) {
+//        passwordField.sendKeys(password);
+//          return this;
+//    }
+//    public LoginPage clickSubmitBtn() {
+//        submitButtonLocator.click();
+//          return this;
+//    }
 
 
 
