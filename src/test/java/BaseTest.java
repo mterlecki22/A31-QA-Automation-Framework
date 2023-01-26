@@ -25,7 +25,7 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-     //   WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup();
     }
 
     @DataProvider(name = "incorrectLoginProviders")
@@ -40,7 +40,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) {
-        driver = pickBrowser(System.getProperty("browser"));
+       // driver = pickBrowser(System.getProperty("browser"));
         LoginTests.driver = new ChromeDriver();
         LoginTests.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
@@ -73,23 +73,24 @@ public class BaseTest {
         LoginTests.driver.quit();
     }
 
-    private static WebDriver pickBrowser (String browser){
-        switch (browser){
-            case "Firefox":
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-            case "MicrosoftEdge":
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                break;
-            default:
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-        }
-        return driver;
-
-    }
+//    private WebDriver pickBrowser (String browser){
+//        switch (browser) {
+//            case "Firefox": {
+//                WebDriverManager.firefoxdriver().setup();
+//                driver = new FirefoxDriver();
+//            }
+//            case "MicrosoftEdge": {
+//                WebDriverManager.edgedriver().setup();
+//                driver = new EdgeDriver();
+//            }
+//            default :{
+//                WebDriverManager.chromedriver().setup();
+//                driver = new ChromeDriver();
+//            }
+//        }
+//        return driver;
+//
+//    }
 
     public static void clickSubmit() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));

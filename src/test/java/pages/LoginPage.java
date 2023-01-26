@@ -45,6 +45,7 @@ public class LoginPage extends BasePage {
         providePassword("te$t$tudent");
         clickSubmitBtn();
 
+
     }
 
     public static void clickSaveButton() {

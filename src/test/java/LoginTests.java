@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AllSongsPage;
@@ -50,12 +51,12 @@ public class LoginTests extends BaseTest {
 //        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 //    }
     @Test
-    public void playSong()   {  // Look at assigment #22 for alterted refactored code
+    public void playSong() throws InterruptedException {  // Look at assigment #22 for alterted refactored code
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
         loginPage.login();
-        homePage.chooseAllSongsList();
+        HomePage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();
         Assert.assertTrue(allSongsPage.isSongPlaying());
