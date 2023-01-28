@@ -1,4 +1,6 @@
 package pages;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,14 +25,14 @@ public class LoginPage extends BasePage {
         super(givenDriver);
         PageFactory.initElements(getDriver(), LoginPage.class);
     }
-
+    @Then("I enter email{string}")
     public void provideEmail(String email) {
         emailField.click();
     }
 
 //    @FindBy (css="[test]")
 //    WebElement email;
-
+    @And ("I enter password {string}")
     public void providePassword(String password) {
         passwordField.sendKeys(password);}
     public void clickSubmitBtn() {
@@ -47,6 +49,7 @@ public class LoginPage extends BasePage {
         providePassword("te$t$tudent");
         clickSubmitBtn();
     }
+    @And("I submit")
     public static void clickSaveButton() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
         saveButton.click();
