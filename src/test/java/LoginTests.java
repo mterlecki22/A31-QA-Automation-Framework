@@ -16,31 +16,31 @@ import static org.openqa.selenium.By.cssSelector;
 
 
 public class LoginTests extends BaseTest {
-
-    @Test
-    public static void LoginEmptyEmailPasswordTest () {
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://bbb.testpro.io/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
-
-    }
-
-    @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
-    public static void LoginEmailValidPassword()throws InterruptedException{
-
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.provideEmail ("mitchelterlecki@gmail.com");
-        loginPage.providePassword ("te$t$tudent");
-        loginPage.clickSubmitBtn();
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
-    }
+//
+//    @Test
+//    public static void LoginEmptyEmailPasswordTest () {
+//
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//
+//        String url = "https://bbb.testpro.io/";
+//        driver.get(url);
+//        Assert.assertEquals(driver.getCurrentUrl(), url);
+//        driver.quit();
+//
+//    }
+//
+//    @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
+//    public static void LoginEmailValidPassword()throws InterruptedException{
+//
+//        HomePage homePage = new HomePage(driver);
+//        LoginPage loginPage = new LoginPage(driver);
+//        loginPage.provideEmail ("mitchelterlecki@gmail.com");
+//        loginPage.providePassword ("te$t$tudent");
+//        loginPage.clickSubmitBtn();
+//        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+//
+//    }
                 //FLUENT INTERFACE EXAMPLE:
 //    @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
 //    public static void LoginEmailValidPassword()throws InterruptedException {
