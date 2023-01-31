@@ -27,15 +27,15 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-
-    @DataProvider(name = "incorrectLoginProviders")
-    public static Object[][] getDataFromDataProviders() {
-        return new Object[][]{
-                {"invalid@email.com", "invalidPassword"},
-                {"demo@mail.com", "invalid"},
-                {"", ""}
-        };
-    }
+//
+//    @DataProvider(name = "incorrectLoginProviders")
+//    public static Object[][] getDataFromDataProviders() {
+//        return new Object[][]{
+//                {"invalid@email.com", "invalidPassword"},
+//                {"demo@mail.com", "invalid"},
+//                {"", ""}
+//        };
+   // }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
@@ -61,12 +61,12 @@ public class BaseTest {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
 //    }
-    public static void login(String email, String password) {   //includes the entire login process
-        provideEmail(email);
-        providePassword(password);
-        clickSubmit();
-
-    }
+//    public static void login(String email, String password) {   //includes the entire login process
+//        provideEmail(email);
+//        providePassword(password);
+//        clickSubmit();
+//
+//    }
 
     @AfterMethod   //Quiting the driver after every method
     public static void closeBrowser() {

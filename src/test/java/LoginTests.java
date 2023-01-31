@@ -55,12 +55,30 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
-        loginPage.login();
-        HomePage.chooseAllSongsList();
+        loginPage.provideEmail("mitchelterlecki@gmail.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
+        allSongsPage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();
         Assert.assertTrue(allSongsPage.isSongPlaying());
+        Thread.sleep(7000);
     }
+
+//    @Test
+//    public void addSongToPlaylist() throws InterruptedException {  // Look at assigment #22 for alterted refactored code
+//        LoginPage loginPage = new LoginPage(driver);
+//        HomePage homePage = new HomePage(driver);
+//        AllSongsPage allSongsPage = new AllSongsPage(driver);
+//        //loginPage.login();
+//        loginPage.provideEmail("mitchelterlecki@gmail.com")
+//                .providePassword("te$t$tudent")
+//                .clickSubmitBtn();
+//        allSongsPage.chooseAllSongsList();
+//        allSongsPage.contextClickFirstSong();
+//        allSongsPage.choosePlay();
+//        Assert.assertTrue(allSongsPage.isSongPlaying());
+//    }
 
 //    @Test
 //    public void playSong()   {  // Look at assigment #22 for alterted refactored code
@@ -71,6 +89,11 @@ public class LoginTests extends BaseTest {
 //        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 //    }
 
+
+    @Test
+    public void launchKoel(){
+
+    }
 }
 
 

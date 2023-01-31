@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,19 +27,24 @@ By userAvatarIcon = By.cssSelector("img.avatar");
         super(givenDriver);
     }
 
-        By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
-        By playlistInputField = By.cssSelector("input[name='name']");
+    @FindBy(css = ".playlist:nth-child(3)")  //Old way: By emailField = By.cssSelector("[type='email']");
+    WebElement firstPlaylist;
+
+    @FindBy(css = "input[name='name']")  //Old way: By emailField = By.cssSelector("[type='email']");
+    WebElement playlistInputField;
+
 
 
     public void doubleClickFirstPlaylist() {
-        doubleClick(driver.findElement(firstPlaylist));
+        doubleClick((firstPlaylist));
     }
 
-    public void enterPlaylistName(String playlistName) {
-        driver.findElement(playlistInputField).sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
-        driver.findElement(playlistInputField).sendKeys(playlistName);
-        driver.findElement(playlistInputField).sendKeys(Keys.ENTER);
-    }
+    public HomePage enterPlaylistName(String playlistName) {
+        playlistInputField.sendKeys((Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE)));
+        playlistInputField.sendKeys(playlistName);
+        playlistInputField.sendKeys(Keys.ENTER);
+        return this;
+     }
         public WebElement getUserAvatar(){
             return findElement(userAvatarIcon);
      }
@@ -46,18 +53,6 @@ By userAvatarIcon = By.cssSelector("img.avatar");
         WebElement playlistElement = driver.findElement(By.xpath("//a[text()=' "+playlistName+"']"));
         return playlistElement.isDisplayed();
     }
-    public static void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.music a.songs"))).click();
-    }
-
-
-
-
-
-
-
-
-
 
 
 

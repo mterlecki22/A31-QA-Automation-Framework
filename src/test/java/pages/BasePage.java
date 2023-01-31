@@ -33,6 +33,15 @@ public class BasePage {
         actions.doubleClick(locator).perform();
     }
 
+    public void contextClick(WebElement locator) {
+        wait.until(elementToBeClickable(locator));
+        actions.contextClick(locator).perform();
+    }
+
+    public void click (WebElement locator) {
+        wait.until(elementToBeClickable(locator));
+        locator.click();
+    }
     public void click (By locator) {
         wait.until(elementToBeClickable(locator));
     }

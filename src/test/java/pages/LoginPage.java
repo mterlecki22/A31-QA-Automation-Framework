@@ -19,20 +19,22 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
-        PageFactory.initElements(driver, LoginPage.class);
     }
     //    @FindBy (css="[test]")
 //    WebElement email;
 
-    public void provideEmail(String email) {
+    public LoginPage provideEmail(String email) {
         emailField.sendKeys(email);
+        return this;
     }
 
-    public void providePassword(String password) {
+    public LoginPage providePassword(String password) {
         passwordField.sendKeys(password);
+        return this;
     }
-    public void clickSubmitBtn() {
-        submitButtonLocator.click();
+    public LoginPage clickSubmitBtn() {
+      submitButtonLocator.click();
+        return this;
     }
 
     // Commented portion is during the class.
