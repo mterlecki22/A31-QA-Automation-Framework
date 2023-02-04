@@ -47,9 +47,7 @@ public class LoginPage extends BasePage {
         providePassword("te$t$tudent");
         clickSubmitBtn();
 
-
     }
-
     public static void clickSaveButton() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
         saveButton.click();
