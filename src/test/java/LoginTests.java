@@ -30,7 +30,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(enabled = true, priority = 1, description = "loginEmailValidPassword")
-    public static void LoginEmailValidPassword()throws InterruptedException{
+    public  void LoginEmailValidPassword()throws InterruptedException{
 
         HomePage homePage = new HomePage(getDriver());
         LoginPage loginPage = new LoginPage(getDriver());
@@ -45,7 +45,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         AllSongsPage allSongsPage = new AllSongsPage(getDriver());
-        loginPage.login();
+//        loginPage.login();
         homePage.chooseAllSongsList();
         allSongsPage.contextClickFirstSong();
         allSongsPage.choosePlay();

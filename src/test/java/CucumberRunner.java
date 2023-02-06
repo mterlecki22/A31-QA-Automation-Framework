@@ -1,4 +1,3 @@
-package stepDefinition;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.TestNGCucumberRunner;
@@ -8,8 +7,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
 
-@CucumberOptions(features = {"src/test/resources/features/Login.feature"})
-
+@CucumberOptions(
+        features = {"src/test/resources/features/Login.feature"},
+        glue =("stepDefinition")
+   //   dryRun = true
+   //   tags = "@sanity @regression"
+)
 public class CucumberRunner extends AbstractTestNGCucumberTests {
     private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -20,6 +23,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
     @DataProvider
     public Object [][] features(){
+
         return testNGCucumberRunner.provideScenarios();
     }
 
@@ -28,3 +32,8 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
         testNGCucumberRunner.finish();
     }
 }
+
+
+
+
+

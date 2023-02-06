@@ -24,12 +24,12 @@ import org.testng.annotations.*;
 
 
 public class BaseTest {
-    public static WebDriver driver = null;
-    public static String url = null;
-    public static WebDriverWait wait = null;
-    public static Actions action = null;
+    public  WebDriver driver = null;
+    public  String url = null;
+    public  WebDriverWait wait = null;
+    public  Actions action = null;
 
-    public static ThreadLocal<WebDriver> threadDriver = null;
+    public  ThreadLocal<WebDriver> threadDriver = null;
 
 
     @BeforeSuite
@@ -54,18 +54,17 @@ public class BaseTest {
         threadDriver = new ThreadLocal<>();
         driver = pickBrowser(System.getProperty("browser"));
         threadDriver.set(driver);
-        Actions action;
         action = new Actions(getDriver());
-        wait = new WebDriverWait(LoginTests.driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         getDriver().get(url);
     }
 
-    public static WebDriver getDriver() {
+    public  WebDriver getDriver() {
         return threadDriver.get();
     }
     
 
-    public WebDriver lambdaTest() throws MalformedURLException {
+    public  WebDriver lambdaTest() throws MalformedURLException {
         String username = "mitchel.terlecki";
         String authKey = "8qM14khlBU9uvIa0Tfoi3trqZVYEVBBOk1jJnCIwzS537fkAAr";
         String hubURL = "https://hub.lambdatest.com/wd/hub";
@@ -77,7 +76,8 @@ public class BaseTest {
         ltOptions.put("user", System.getenv("LT_USERNAME"));
         ltOptions.put("accessKey", System.getenv("LT_ACCESS_KEY"));
         ltOptions.put("build", "Selenium 4");
-        ltOptions.put("name", this.getClass().getName());
+//        ltOptions.put("name", this.getClass().getName());
+
         ltOptions.put("platformName", "Windows 10");
         ltOptions.put("seCdp", true);
         ltOptions.put("selenium_version", "4.0.0");
@@ -88,7 +88,7 @@ public class BaseTest {
     }
 
 
-    private static WebDriver pickBrowser(String browser) throws MalformedURLException {
+    private WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.250:4444";
         switch (browser) {
@@ -101,15 +101,15 @@ public class BaseTest {
                 driver = new EdgeDriver();
                 break;
             case "grid-firefox":
-                caps.setCapability("browserName", "Firefox");
+                caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-edge":
-                caps.setCapability("browserName", "Mircrosoft Edge");
+                caps.setCapability("browserName", "MicrosoftEdge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-chrome":
-                caps.setCapability("browserName", "Chrome");
+                caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-            case "cloud"
+            case "cloud":
             return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
@@ -125,7 +125,7 @@ public class BaseTest {
 //        String url = "https://bbb.testpro.io/";
 //        driver.get(url);
 //    }
-    public static void login(String email, String password) {   //includes the entire login process
+    public void login(String email, String password) {   //includes the entire login process
         provideEmail(email);
         providePassword(password);
         clickSubmit();
@@ -133,18 +133,18 @@ public class BaseTest {
     }
 
     @AfterMethod   //Quiting the driver after every method
-    public static void closeBrowser() {
+    public  void closeBrowser() {
         getDriver().quit();
         threadDriver.remove();
     }
 
-    public static void clickSubmit() {
+    public  void clickSubmit() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
         submitButton.click();
         //fluentWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("")));  //fluentWait example
     }
 
-    public static void providePassword(String password) {
+    public  void providePassword(String password) {
         WebElement passwordField = getDriver().findElement(By.cssSelector("[type='password']"));
         wait.until(ExpectedConditions.elementToBeClickable(passwordField)); //referring to 'elementToBeClickable' this
         //    method only takes WebElement - otherwise see the 'provideEmail for other way
@@ -152,7 +152,7 @@ public class BaseTest {
         passwordField.sendKeys(password);
     }
 
-    public static void provideEmail(String email) {
+    public  void provideEmail(String email) {
         WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.clear();
@@ -160,24 +160,24 @@ public class BaseTest {
     }
 
 
-    public static void clickSaveButton() {
+    public  void clickSaveButton() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
         saveButton.click();
     }
 
-    public static void provideProfileName(String randomName) {
+    public  void provideProfileName(String randomName) {
         WebElement profileName = getDriver().findElement(By.cssSelector("[name='name']"));
         profileName.clear();
         profileName.sendKeys(randomName);
     }
 
-    public static void provideCurrentPassword(String password) {
+    public void provideCurrentPassword(String password) {
         WebElement currentPassword = getDriver().findElement(By.cssSelector("[name='current_password"));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
 
-    public static String generateRandomName() {
+    public  String generateRandomName() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
@@ -186,7 +186,7 @@ public class BaseTest {
         return notificationText.isDisplayed();
     }
 
-    public static void searchSong(String songTitleKeyword) throws InterruptedException {
+    public  void searchSong(String songTitleKeyword) throws InterruptedException {
         WebElement searchField = getDriver().findElement(By.cssSelector("div#searchForm-input[type=search]"));
         searchField.sendKeys(songTitleKeyword);
         Thread.sleep(4000);
@@ -211,7 +211,7 @@ public class BaseTest {
 
     }
 
-    public static void viewAllSearchResults() throws InterruptedException {
+    public  void viewAllSearchResults() throws InterruptedException {
         WebElement viewAllSearchResults = getDriver().findElement(By.cssSelector("div.results-section.songs-h1-button"));
         wait.until(ExpectedConditions.elementToBeSelected(By.cssSelector(String.valueOf(viewAllSearchResults))));
         viewAllSearchResults.click();
@@ -223,14 +223,14 @@ public class BaseTest {
         return songList;
     }
 
-    public static void selectFirstSongResult() throws InterruptedException {
+    public  void selectFirstSongResult() throws InterruptedException {
         WebElement selectFirstSongResult = getDriver().findElement(By.cssSelector("section#songResultsWrapper-tr.song-item-td.title"));
         wait.until(ExpectedConditions.elementToBeSelected(By.cssSelector(String.valueOf(selectFirstSongResult))));
         selectFirstSongResult.click();
 
     }
 
-    public static void clickAddToButton() throws InterruptedException {
+    public  void clickAddToButton() throws InterruptedException {
         WebElement addTo = getDriver().findElement(By.cssSelector("button.btn-add-to"));
         wait.until(ExpectedConditions.elementToBeSelected(By.cssSelector(String.valueOf(addTo))));
         addTo.click();
@@ -241,7 +241,7 @@ public class BaseTest {
 //    WebElement playlist = driver.findElement(By.xpath("//li/a[contains(@href,'#!/playlist/35439'"));
 //    action.clickAndHold(song).moveToElement(playlist).release(playlist).build().perform();
 //  }
-    public static Dimension countSongsInPlaylist() {
+    public  Dimension countSongsInPlaylist() {
         return getDriver().findElement(By.cssSelector("#playlistWrapper td.title")).getSize();
     }
 
@@ -265,7 +265,7 @@ public class BaseTest {
 
     }
 
-    public static void hoverToPlayBtn() {
+    public  void hoverToPlayBtn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn]")));
         WebElement playButton = getDriver().findElement(By.xpath("//span[@data-testid='play-btn]"));
         Actions actions = new Actions (getDriver());

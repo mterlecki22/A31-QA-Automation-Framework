@@ -10,7 +10,7 @@
         <classes>
        <!--   //  <class name="LoginTests"/>
           //  <class name="BaseTest"/> -->
-            <class name="stepDefinition.CucumberRunner"/>
+            <class name="CucumberRunner"/>
         </classes>
     </test>
 </suite>
